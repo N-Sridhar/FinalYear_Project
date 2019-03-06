@@ -7,7 +7,7 @@ Vue.use(Vuex)
 /* eslint-disable */
 export default new Vuex.Store({
   state: {
-
+    user: null
   },
   mutations: {
     setUser (state, payload) {
@@ -19,10 +19,12 @@ export default new Vuex.Store({
       firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
       .then(
         user => {
-          const newUser = {
-            id: user.uid
-          }
-          commit('setUser', newUser)
+          // const newUser = {
+          //   id: user.uid
+          // }
+          // commit('setUser', newUser)
+          alert('Account was created for ${user.email}');
+          this.$router.push('/');
         }
       )
       .catch (
@@ -30,6 +32,11 @@ export default new Vuex.Store({
           console.log(error)
         }
       )
+    }
+  },
+  getters: {
+    user(state) {
+      return state.user
     }
   }
 })

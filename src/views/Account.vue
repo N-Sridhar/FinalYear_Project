@@ -1,5 +1,6 @@
 <template>
   <div class="account">
+    <h1>This is Account page</h1>
     <v-container>
       <v-layout row>
         <v-flex xs12 sm6 offset-sm3 my-4>
@@ -55,6 +56,16 @@ export default {
   computed: {
     confirmPasswords () {
       return this.password !== this.confirmPassword ? 'Passwords do not match' : 'Passwords matched'
+    },
+    user () {
+      return this.$store.getters.user
+    }
+  },
+  watch: {
+    user(value) {
+      if (value !== null && value !== undefined) {
+        this.$router.push('/')
+      }
     }
   },
   methods: {
